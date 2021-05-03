@@ -1,2 +1,2 @@
 # UncertainDialogue_evaluation
-A web page to evaluate a image-text mixed dialogue
+An evaluation system for uncertain dialogue dataset
