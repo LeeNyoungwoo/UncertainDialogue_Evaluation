@@ -5,12 +5,6 @@ import './ChatGrid.css';
 export default function ChatGrid(props) {
     const messagesEnd = useRef(null)
 
-    // const scrollToBottom = () => {
-    //     messagesEnd.current.scrollIntoView({ behavior: "smooth" })
-    // }
-
-    // useEffect(scrollToBottom, [props.chatList]);
-
     return (
         <div className="chatOuterBox">
             <div className="chatInnerBox">
@@ -19,8 +13,6 @@ export default function ChatGrid(props) {
                     <div style={{height:'2vh'}}></div>
                     <div ref={messagesEnd} />
                 </main>
-                {/* <div className="textInputBox">
-                </div> */}
             </div>
         </div>
     );

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Dropdown, Radio, Form } from 'semantic-ui-react'
+import _ from 'lodash'
+import { Button, Dropdown, Radio, Form, Label } from 'semantic-ui-react'
 import './RightGrid.css';
 
 export default class RightGrid extends Component{
 
     render() {
-        const { conv_addIdx, conv_subIdx, data_idx, chatData_length, top1_mode,
+        const { conv_addIdx, conv_subIdx, data_idx, chatData_length, mode,
             conv_changePrev, conv_changeNext, prev_status, next_status, stateOptions,
-            conv_changeDataset, conv_setMode, modeOptions, purposeOptions,
+            conv_changeDataset, conv_setMode, modeOptions, chatData, 
             conv_setQ1, conv_setQ2, q1_rating, q2_rating
         } = this.props;
 
@@ -22,15 +23,11 @@ export default class RightGrid extends Component{
         const setDone = () => {
             console.log(q1_rating)
             console.log(q2_rating)
-            // console.log(q3_rating)
-            // console.log(q4_rating)
             
-            if (top1_mode === 0){
+            if (mode === 0){
                 downloadTxtFile(new Blob([q1_rating.join()], {type: 'text/plain'}), 'q1_results.txt')
             }
             downloadTxtFile(new Blob([q2_rating.join()], {type: 'text/plain'}), 'q2_results.txt')
-            // downloadTxtFile(new Blob([q3_rating.join()], {type: 'text/plain'}), 'P1_q3_results.txt')
-            // downloadTxtFile(new Blob([q4_rating.join()], {type: 'text/plain'}), 'P1_q4_results.txt')
         }
         
         const setNextStatus = () => {
@@ -67,10 +64,15 @@ export default class RightGrid extends Component{
                 conv_setMode(0)
             } else if (data.value === 1){
                 conv_setMode(1)
-            } else if (data.value === 2){
-                conv_setMode(2)
             }
         }
+
+        const getOptions = (number) =>
+            _.times(number, (index) => ({
+                key: index,
+                text: `${index+1}`,
+                value: index,
+        }))
 
         const changeRateQ1 = (e, data) => {
             const pair = {
@@ -87,23 +89,6 @@ export default class RightGrid extends Component{
             }
             conv_setQ2(pair)
         }
-
-        // const changeRateQ3 = (e, data) => {
-        //     const pair = {
-        //         idx: data_idx,
-        //         value: data.value
-        //     }
-        //     conv_setQ3(pair)
-        // }
-
-        // const changeRateQ4 = (e, data) => {
-        //     const pair = {
-        //         idx: data_idx,
-        //         value: data.value
-        //     }
-        //     conv_setQ4(pair)
-        // }
-
 
         const section = (data_idx+1) + ' / ' + (chatData_length+1)
     
@@ -125,153 +110,46 @@ export default class RightGrid extends Component{
                     />
                 </div>
                 <div className="RightQuestionGrid">
-                    <div className="RightSubQuestionGrid" style={top1_mode === 0 ? null : {height:"30%"}}>
-                        { top1_mode === 0
-                            ?   <span>1. 치환된 문장은 원본 이미지의 <b style={{color: 'blue'}}>의미</b>를 얼마나 잘 나타내고 있나요?</span>
-                            // ?   <span>1. How well does the replaced sentence explain the <b style={{color: 'blue'}}>meaning</b> of the target image?</span>
-                            :   null
-                        }
-                        { top1_mode === 0
-                            ?   <Form>
-                                    <Form.Field>
-                                    <Radio
-                                        label='0'
-                                        name='radioGroup'
-                                        value={0}
-                                        checked={q1_rating[data_idx] === 0}
-                                        onChange={changeRateQ1}
-                                    />
-                                    </Form.Field>
-                                    <Form.Field>
-                                    <Radio
-                                        label='1'
-                                        name='radioGroup'
-                                        value={1}
-                                        checked={q1_rating[data_idx] === 1}
-                                        onChange={changeRateQ1}
-                                    />
-                                    </Form.Field>
-                                    <Form.Field>
-                                    <Radio
-                                        label='2'
-                                        name='radioGroup'
-                                        value={2}
-                                        checked={q1_rating[data_idx] === 2}
-                                        onChange={changeRateQ1}
-                                    />
-                                    </Form.Field>
-                                </Form>
-                            :   null
-                        }
-                        { top1_mode === 0
-                            ?   <span>2. 대화에서 원본 이미지가 삭제되고 치환된 문장이 그 자리를 대체한다면, 변경된 <b style={{color: 'blue'}}>대화의 흐름</b>은 얼마나 자연스러운가요?</span>
-                            // ?   <span>2. If the sentence replaces the target image, how <b style={{color: 'blue'}}>consistent is the context</b> of the conversation?</span>
-                            :   <span>이미지 다음 문장은 <b style={{color: 'blue'}}>이미지를 포함하는 이전 대화의 흐름</b>과 얼마나 자연스럽게 연결되나요?</span>
-                            // :   <span>How well does the sentence that follows the image <b style={{color: 'blue'}}>match the prior context</b> of the conversation that contains the image?</span>
-                        }
+                    { mode === 0
+                        ?   <div className="RightSubQuestionGrid" style={{height:"30%"}}>
+                                <span>다음 단어들 중 <b style={{color: 'blue'}}>모르는 단어</b>는 몇 개인가요?</span>
+                                <div>
+                                    {chatData[data_idx]['changed'].map((word_token) => (
+                                    <Label key={word_token}>
+                                        {word_token}
+                                    </Label>
+                                    ))}
+                                </div>
+                                <Dropdown
+                                    placeholder='Answer'
+                                    compact
+                                    selection
+                                    options={getOptions(chatData[data_idx]['changed'].length)}
+                                    value={q1_rating[data_idx]}
+                                    onChange={changeRateQ1}
+                                />
+                            </div>
+                        :   null
+                    }
+                    <div className="RightSubQuestionGrid" style={{height:"30%"}}>
+                        <span>왼쪽 대화에 대해 가장 <b style={{color: 'blue'}}>적절한</b> 답변은 무엇인가요?</span>
                         <Form>
-                            <Form.Field>
-                            <Radio
-                                label='0'
-                                name='radioGroup'
-                                value={0}
-                                checked={q2_rating[data_idx] === 0}
-                                onChange={changeRateQ2}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='1'
-                                name='radioGroup'
-                                value={1}
-                                checked={q2_rating[data_idx] === 1}
-                                onChange={changeRateQ2}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='2'
-                                name='radioGroup'
-                                value={2}
-                                checked={q2_rating[data_idx] === 2}
-                                onChange={changeRateQ2}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='3'
-                                name='radioGroup'
-                                value={3}
-                                checked={q2_rating[data_idx] === 3}
-                                onChange={changeRateQ2}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='4'
-                                name='radioGroup'
-                                value={4}
-                                checked={q2_rating[data_idx] === 4}
-                                onChange={changeRateQ2}
-                            />
-                            </Form.Field>
+                            <Form.Group grouped>
+                                {chatData[data_idx]['candidates'].map(
+                                    (content, i) => (
+                                        <Form.Field>
+                                            <Radio
+                                                label={content}
+                                                name='radioGroup'
+                                                value={i}
+                                                checked={q2_rating[data_idx] === i}
+                                                onChange={changeRateQ2}
+                                            />
+                                        </Form.Field>
+                                    )
+                                )}
+                            </Form.Group>
                         </Form>
-                        {/* <span>3. 대화에서 원본 문장이 삭제 되고 치환된 이미지가 그 자리를 대체한다면, 변경된 대화의 <b style={{color: 'blue'}}>흐름</b>은 얼마나 자연스러운가요?</span>
-                        <Form>
-                            <Form.Field>
-                            <Radio
-                                label='0'
-                                name='radioGroup'
-                                value={0}
-                                checked={q3_rating[data_idx] === 0}
-                                onChange={changeRateQ3}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='1'
-                                name='radioGroup'
-                                value={1}
-                                checked={q3_rating[data_idx] === 1}
-                                onChange={changeRateQ3}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='2'
-                                name='radioGroup'
-                                value={2}
-                                checked={q3_rating[data_idx] === 2}
-                                onChange={changeRateQ3}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='3'
-                                name='radioGroup'
-                                value={3}
-                                checked={q3_rating[data_idx] === 3}
-                                onChange={changeRateQ3}
-                            />
-                            </Form.Field>
-                            <Form.Field>
-                            <Radio
-                                label='4'
-                                name='radioGroup'
-                                value={4}
-                                checked={q3_rating[data_idx] === 4}
-                                onChange={changeRateQ3}
-                            />
-                            </Form.Field>
-                        </Form>
-                        <span>4. 대화에서 원본 문장이 삭제 되고 치환된 이미지가 그 자리를 대체한다면, 변경된 대화에서 이미지가 사용된 <b style={{color: 'blue'}}>목적</b>은 무엇인가요?</span>
-                        <Dropdown
-                            placeholder='Select the purpose'
-                            selection
-                            value={q4_rating[data_idx]}
-                            options={purposeOptions}
-                            onChange={changeRateQ4}
-                        /> */}
                     </div>
                 </div>
                 <div className="RightTextGrid">

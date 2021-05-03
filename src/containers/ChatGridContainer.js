@@ -12,10 +12,6 @@ export default function ChatGridContainer() {
         dispatch(addIdx());
     }
 
-    // const conv_chatAdd = (object) => {
-    //     dispatch(chatAdd(object));
-    // }
-
     return (
         <ChatGrid
             data_idx={data_idx}
