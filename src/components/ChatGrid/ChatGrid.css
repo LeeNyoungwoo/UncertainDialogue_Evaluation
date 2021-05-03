@@ -1,0 +1,52 @@
+div {
+    display: block;
+}
+
+.chatOuterBox {
+    position: absolute;
+    overflow-y: scroll;
+    flex: 0 1 auto;
+    left: 24.58%;
+    right: 24.64%;
+    top: 0%;
+    bottom: 0%;
+}
+
+.chatInnerBox {
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.chatRoom {
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.chatRoom .dateSection {
+    text-align: center;
+    font-size: 1.8vh;
+    height: 2vh;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 7vh;
+}
+
+.textInputBox {
+    left: 24.58%;
+    right: 24.64%;
+    height: 8vh;
+    width: auto;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    position: fixed;
+    background-color: #eeeeee;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.textInputBoxInput {
+    width: 100%;
+    padding: 5px;
+    font-size: 2vh;
+}
