@@ -15,12 +15,12 @@ div {
 }
 
 .messageSectionBody {
-    padding: 2vh 2vw;
+    padding: 1.2vh 2vw;
     border-radius: 5px;
     font-size: 2vh;
     font-family: 'Roboto', sans-serif;
     line-height: 150%;
-    margin-bottom: 3vh;
+    margin-bottom: 2.2vh;
 }
 
 .messageSectionBot .messageSectionBody {

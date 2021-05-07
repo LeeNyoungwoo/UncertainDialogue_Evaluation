@@ -10,11 +10,11 @@ export default function LeftGrid() {
                 <Image style={{width: '15vh', height: 'auto'}} src={chatbot_img}/>
             </div>
             <div className="leftGridTag">
-                Uncertain Dialogues
-            </div>
-            <div className="leftGridTag2">
                 Evaluation System
             </div>
+            {/* <div className="leftGridTag2">
+                Evaluation System
+            </div> */}
         </div>
     );
 }

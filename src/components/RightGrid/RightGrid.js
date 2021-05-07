@@ -115,9 +115,9 @@ export default class RightGrid extends Component{
                                 <span>다음 단어들 중 <b style={{color: 'blue'}}>모르는 단어</b>는 몇 개인가요?</span>
                                 <div>
                                     {chatData[data_idx]['changed'].map((word_token) => (
-                                    <Label key={word_token}>
-                                        {word_token}
-                                    </Label>
+                                        <Label>
+                                            {word_token}
+                                        </Label>
                                     ))}
                                 </div>
                                 <Dropdown

@@ -1,7 +1,10 @@
 import { createAction, handleActions } from 'redux-actions'
-import final_100 from "./datasets/final_100.json";
+import uw_changed from "./datasets/uw_changed_human.json";
+import uw_origin from "./datasets/uw_origin_human.json";
+import ic_origin from "./datasets/ic_origin_human.json";
+import ic_changed from "./datasets/ic_changed_human.json";
 
-const dataset_lists = [final_100]
+const dataset_lists = [uw_origin, uw_changed, ic_origin, ic_changed]
 
 const ADD_IDX = 'chat/ADD_IDX' // 다음 대화로 이동
 const SUB_IDX = 'chat/SUB_IDX' // 이전 대화로 이동
@@ -30,8 +33,23 @@ const initialState = {
     stateOptions: [
         {
             key: 0,
-            text: 'final_100',
+            text: 'uw_origin',
             value: 0
+        },
+        {
+            key: 1,
+            text: 'uw_changed',
+            value: 1
+        },
+        {
+            key: 2,
+            text: 'ic_origin',
+            value: 2
+        },
+        {
+            key: 3,
+            text: 'ic_changed',
+            value: 3
         },
     ],
     mode: 0,
