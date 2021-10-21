@@ -3,7 +3,7 @@
 
 .RightGrid{
     position: absolute;
-    left: 75.42%;
+    left: 70%;
     right: 0%;
     top: 0%;
     bottom: 0%;
@@ -31,13 +31,11 @@
 }
 
 .RightSubQuestionGrid{
-    height: 50%;
     width: 80%;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     flex-direction: column;
-    margin-bottom: 15%;
 }
 
 .RightSubQuestionGrid span{
@@ -48,15 +46,23 @@
     margin-bottom: 3%;
 }
 
-.RightSubQuestionGrid .ui.checkbox label{
+.RightSubQuestionGrid .ui.list{
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.5vh;
-    margin-bottom: 1.2vh;
 }
 
-.RightSubQuestionGrid .ui.label{
-    font-size: 1.3vh;
-    margin-bottom: 1.2vh;
+.RightSubQuestionGrid .ui.form{
+    display: flex;
+    flex-direction: row;
+}
+
+.RightSubQuestionGrid .ui.form .field{
+    margin-bottom: 3vh;
+    margin-right: 1vw;
+}
+
+.RightSubQuestionGrid .ui.checkbox label{
+    font-size: 1.2vh;
 }
 
 .RightTextGrid{
