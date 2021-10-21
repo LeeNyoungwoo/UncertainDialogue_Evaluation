@@ -1,2 +1,2 @@
-# UncertainDialogue_evaluation
-An evaluation system for uncertain dialogue dataset
+# Evaluation for Generated Negatives
+An evaluation system for generated negatives
