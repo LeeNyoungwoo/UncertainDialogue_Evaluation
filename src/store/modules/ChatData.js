@@ -1,7 +1,12 @@
 import { createAction, handleActions } from 'redux-actions'
-import direct_wo_ans from "./datasets/eval_direct_wo_ans.json";
 
-const dataset_lists = [direct_wo_ans]
+// Dataset for evaluating of generated negatives
+import direct_wo_ans from "./datasets/eval_direct_wo_ans.json";
+import human from "./datasets/eval_human.json";
+import maskandfill from "./datasets/eval_maskandfill.json";
+import meta from "./datasets/eval_meta.json";
+
+const dataset_lists = [human, direct_wo_ans, maskandfill, meta]
 
 const ADD_IDX = 'chat/ADD_IDX' // 다음 대화로 이동
 const SUB_IDX = 'chat/SUB_IDX' // 이전 대화로 이동
@@ -26,22 +31,22 @@ const initialState = {
     stateOptions: [
         {
             key: 0,
-            text: 'GPT(direct_wo_ans)',
+            text: 'Human',
             value: 0
         },
         {
             key: 1,
-            text: 'uw_changed',
+            text: 'GPT(direct_wo_ans)',
             value: 1
         },
         {
             key: 2,
-            text: 'ic_origin',
+            text: 'Maskandfill',
             value: 2
         },
         {
             key: 3,
-            text: 'ic_changed',
+            text: 'GPT(meta)',
             value: 3
         },
     ],

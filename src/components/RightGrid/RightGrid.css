@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Molengo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 .RightGrid{
     position: absolute;
@@ -12,7 +12,7 @@
 }
 
 .RightTagGrid{
-    height: 15%;
+    height: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@
 }
 
 .RightQuestionGrid{
-    height: 60%;
+    height: 670px;
     margin-left: 5%;
     width: 90%;
     display: flex;
@@ -28,27 +28,28 @@
     align-items: center;
     flex-direction: column;
     background-color: #ffffff;
+    overflow-y: scroll;
 }
 
 .RightSubQuestionGrid{
     width: 80%;
-    display: flex;
+    height: 600px;
+    /* display: flex; */
     justify-content: space-around;
     align-items: flex-start;
     flex-direction: column;
 }
 
 .RightSubQuestionGrid span{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.6vh;
     line-height: 160%;
     margin-top: 10%;
     margin-bottom: 3%;
 }
 
 .RightSubQuestionGrid .ui.list{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.5vh;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;
+    font-size: 1.6vh;
 }
 
 .RightSubQuestionGrid .ui.form{
@@ -62,7 +63,7 @@
 }
 
 .RightSubQuestionGrid .ui.checkbox label{
-    font-size: 1.2vh;
+    font-size: 1.25vh;
 }
 
 .RightTextGrid{

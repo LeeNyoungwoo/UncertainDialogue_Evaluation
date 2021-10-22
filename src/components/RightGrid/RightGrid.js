@@ -84,45 +84,45 @@ export default class RightGrid extends Component{
                     />
                 </div>
                 <div className="RightQuestionGrid">
-                    <div className="RightSubQuestionGrid" style={{height:"30%"}}>
+                    <div className="RightSubQuestionGrid">
                         <List>
-                        {chatData[data_idx]['negatives'].map(
-                            (candidate, i) => (
-                                <div key={i}>
-                                    <List.Item>{i+1}. {candidate}</List.Item>
-                                    <div style={{height:'1vh'}}></div>
-                                    <Form>
-                                        <Form.Field>
-                                        <Radio
-                                            label='Random Negative'
-                                            name='radioGroup'
-                                            value={{r_idx: i, type: 0}}
-                                            checked={r_type[data_idx][i] === 0}
-                                            onChange={changeRType}
-                                        />
-                                        </Form.Field>
-                                        <Form.Field>
-                                        <Radio
-                                            label='Hard Negative'
-                                            name='radioGroup'
-                                            value={{r_idx: i, type: 1}}
-                                            checked={r_type[data_idx][i] === 1}
-                                            onChange={changeRType}
-                                        />
-                                        </Form.Field>
-                                        <Form.Field>
-                                        <Radio
-                                            label='False Negative'
-                                            name='radioGroup'
-                                            value={{r_idx: i, type: 2}}
-                                            checked={r_type[data_idx][i] === 2}
-                                            onChange={changeRType}
-                                        />
-                                        </Form.Field>
-                                    </Form>
-                                </div>
-                            )
-                        )}
+                            {chatData[data_idx]['negatives'].map(
+                                (candidate, i) => (
+                                    <div key={i}>
+                                        <List.Item>{i+1}. {candidate}</List.Item>
+                                        <div style={{height:'1.5vh'}}></div>
+                                        <Form>
+                                            <Form.Field>
+                                            <Radio
+                                                label='Random Negative'
+                                                name='radioGroup'
+                                                value={{r_idx: i, type: 0}}
+                                                checked={r_type[data_idx][i] === 0}
+                                                onChange={changeRType}
+                                            />
+                                            </Form.Field>
+                                            <Form.Field>
+                                            <Radio
+                                                label='Hard Negative'
+                                                name='radioGroup'
+                                                value={{r_idx: i, type: 1}}
+                                                checked={r_type[data_idx][i] === 1}
+                                                onChange={changeRType}
+                                            />
+                                            </Form.Field>
+                                            <Form.Field>
+                                            <Radio
+                                                label='False Negative'
+                                                name='radioGroup'
+                                                value={{r_idx: i, type: 2}}
+                                                checked={r_type[data_idx][i] === 2}
+                                                onChange={changeRType}
+                                            />
+                                            </Form.Field>
+                                        </Form>
+                                    </div>
+                                )
+                            )}
                         </List>
                     </div>
                 </div>
