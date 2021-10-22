@@ -7,7 +7,7 @@ export default class MessageList extends Component {
         const { chatData, data_idx } = this.props;
 
         // render whole messages during conversation
-        const messages = chatData[data_idx]['text'].map(
+        const messages = chatData[data_idx]['context'].map(
             (content, i) => (
                 <div key={i}>
                     { (i % 2) === 0
@@ -29,7 +29,7 @@ export default class MessageList extends Component {
         return (
             <div>
                 {messages}
-                { (chatData[data_idx]['text'].length % 2) === 0
+                { (chatData[data_idx]['context'].length % 2) === 0
                     ?   <Message
                             type={true}
                             text={'?'}

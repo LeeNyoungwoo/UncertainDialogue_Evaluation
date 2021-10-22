@@ -86,7 +86,7 @@ export default class RightGrid extends Component{
                 <div className="RightQuestionGrid">
                     <div className="RightSubQuestionGrid" style={{height:"30%"}}>
                         <List>
-                        {chatData[data_idx]['candidates'].map(
+                        {chatData[data_idx]['negatives'].map(
                             (candidate, i) => (
                                 <div key={i}>
                                     <List.Item>{i+1}. {candidate}</List.Item>

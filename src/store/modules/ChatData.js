@@ -1,10 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
-// import uw_changed from "./datasets/uw_changed_human.json";
-import uw_origin from "./datasets/uw_origin_human.json";
-// import ic_origin from "./datasets/ic_origin_human.json";
-// import ic_changed from "./datasets/ic_changed_human.json";
+import direct_wo_ans from "./datasets/eval_direct_wo_ans.json";
 
-const dataset_lists = [uw_origin]
+const dataset_lists = [direct_wo_ans]
 
 const ADD_IDX = 'chat/ADD_IDX' // 다음 대화로 이동
 const SUB_IDX = 'chat/SUB_IDX' // 이전 대화로 이동
@@ -29,7 +26,7 @@ const initialState = {
     stateOptions: [
         {
             key: 0,
-            text: 'uw_origin',
+            text: 'GPT(direct_wo_ans)',
             value: 0
         },
         {
